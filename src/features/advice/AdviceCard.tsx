@@ -1,18 +1,22 @@
-import useViewportSize from "../hooks/useViewportSize";
-import PatternDividerDesktop from "../svg/PatternDividerDesktop";
-import PatternDividerMobile from "../svg/PatternDividerMobile";
+import useViewportSize from "../../hooks/useViewportSize";
+import PatternDividerDesktop from "../../svg/PatternDividerDesktop";
+import PatternDividerMobile from "../../svg/PatternDividerMobile";
+import { useAdvice } from "./useAdvice";
 
 const AdviceCard: React.FC = () => {
   const { isTablet, isDesktop } = useViewportSize();
+  const { isLoading, data } = useAdvice();
+  console.log("toto", data);
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <article className="bg-dark-grayish-blue relative h-[19.6875rem] w-[21.4375rem] rounded-[10px] px-6 py-10 text-center md:h-[20.75rem] md:w-[33.75rem] md:p-12">
       <p className="text-neon-green mb-6 text-[0.6875rem] tracking-[3.46px] md:text-sm md:tracking-[4.09px]">
-        ADVICE #117
+        {`ADVICE #${data.slip.id}`}
       </p>
       <p className="text-light-cyan mb-6 text-[1.5rem] -tracking-[0.26px] md:mb-10 md:text-[1.75rem] md:leading-snug md:-tracking-[0.3px]">
-        “It is easy to sit up and take notice, what's difficult is getting up
-        and taking action.”
+        {data.slip.advice}
       </p>
       {isTablet || isDesktop ? (
         <PatternDividerDesktop />
