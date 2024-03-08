@@ -10,9 +10,6 @@ const AdviceCard: React.FC = () => {
   const { data, refetch, isFetching } = useAdvice();
   //TODO: play with react query, react spring animation, fix ui, fix bs double click button
 
-  // I keep this line for future references. To show that you can use isLoading, isFetching, or isRefetching
-  const showLoadingIndicator = isFetching;
-
   const handleDiceClick = async () => {
     await refetch();
   };
