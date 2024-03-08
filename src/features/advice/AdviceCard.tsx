@@ -1,4 +1,3 @@
-import { useState } from "react";
 import useViewportSize from "../../hooks/useViewportSize";
 import PatternDividerDesktop from "../../svg/PatternDividerDesktop";
 import PatternDividerMobile from "../../svg/PatternDividerMobile";
@@ -6,25 +5,25 @@ import { useAdvice } from "./useAdvice";
 
 const AdviceCard: React.FC = () => {
   const { isTablet, isDesktop } = useViewportSize();
-  const { isLoading, data, refetch } = useAdvice();
-  const [isRefetching, setIsRefetching] = useState(false);
-  console.log("data", data);
+  // I keep this line for future references. To show that you can use isLoading, isFetching, or isRefetching
+  // const { data, refetch, isLoading, isFetching, isRefetching } = useAdvice();
+  const { data, refetch, isFetching } = useAdvice();
+  //TODO: play with react query, react spring animation, fix ui, fix bs double click button
 
-  const isFetching = isLoading || isRefetching;
+  // I keep this line for future references. To show that you can use isLoading, isFetching, or isRefetching
+  const showLoadingIndicator = isFetching;
 
   const handleDiceClick = async () => {
-    setIsRefetching(true);
     await refetch();
-    setIsRefetching(false);
   };
 
   return (
     <article className="bg-dark-grayish-blue relative h-[19.6875rem] w-[21.4375rem] rounded-[10px] px-6 py-10 text-center md:h-[20.75rem] md:w-[33.75rem] md:p-12">
       <p className="text-neon-green mb-6 text-[0.6875rem] tracking-[3.46px] md:text-sm md:tracking-[4.09px]">
-        {!isFetching && `ADVICE #${data.slip.id}`}
+        {!showLoadingIndicator && `ADVICE #${data.slip.id}`}
       </p>
       <p className="text-light-cyan mb-6 text-[1.5rem] -tracking-[0.26px] md:mb-10 md:text-[1.75rem] md:leading-snug md:-tracking-[0.3px]">
-        {isFetching ? "Loading..." : data.slip.advice}
+        {showLoadingIndicator ? "Loading..." : data.slip.advice}
       </p>
       {isTablet || isDesktop ? (
         <PatternDividerDesktop />
