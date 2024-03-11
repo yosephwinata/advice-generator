@@ -8,19 +8,18 @@ const AdviceCard: React.FC = () => {
   // I keep this line for future references. To show that you can use isLoading, isFetching, or isRefetching
   // const { data, refetch, isLoading, isFetching, isRefetching } = useAdvice();
   const { data, refetch, isFetching } = useAdvice();
-  //TODO: play with react query, react spring animation, fix ui, fix bs double click button
 
   const handleDiceClick = async () => {
     await refetch();
   };
 
   return (
-    <article className="bg-dark-grayish-blue relative h-[19.6875rem] w-[21.4375rem] rounded-[10px] px-6 py-10 text-center md:h-[20.75rem] md:w-[33.75rem] md:p-12">
-      <p className="text-neon-green mb-6 text-[0.6875rem] tracking-[3.46px] md:text-sm md:tracking-[4.09px]">
-        {!showLoadingIndicator && `ADVICE #${data.slip.id}`}
+    <article className="relative min-h-60 w-[21.4375rem] rounded-[10px] bg-dark-grayish-blue px-6 py-10 text-center md:h-[20.75rem] md:w-[33.75rem] md:p-12">
+      <p className="mb-6 text-[0.6875rem] tracking-[3.46px] text-neon-green md:text-sm md:tracking-[4.09px]">
+        {!isFetching && `ADVICE #${data.slip.id}`}
       </p>
-      <p className="text-light-cyan mb-6 text-[1.5rem] -tracking-[0.26px] md:mb-10 md:text-[1.75rem] md:leading-snug md:-tracking-[0.3px]">
-        {showLoadingIndicator ? "Loading..." : data.slip.advice}
+      <p className="mb-6 text-[1.5rem] -tracking-[0.26px] text-light-cyan md:mb-10 md:text-[1.75rem] md:leading-snug md:-tracking-[0.3px]">
+        {isFetching ? "Loading..." : data.slip.advice}
       </p>
       {isTablet || isDesktop ? (
         <PatternDividerDesktop />
@@ -42,7 +41,7 @@ const DiceButton: React.FC<DiceButtonProps> = ({ onDiceClick, isFetching }) => {
     <button
       onClick={onDiceClick}
       disabled={isFetching}
-      className="bg-neon-green hover:shadow-neon-button absolute bottom-0 left-1/2 flex h-16 w-16 -translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full"
+      className="absolute bottom-0 left-1/2 flex h-16 w-16 -translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full bg-neon-green hover:shadow-neon-button"
     >
       <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
         <path
