@@ -14,7 +14,7 @@ const AdviceCard: React.FC = () => {
   };
 
   return (
-    <article className="relative min-h-60 w-[21.4375rem] rounded-[10px] bg-dark-grayish-blue px-6 py-10 text-center md:h-[20.75rem] md:w-[33.75rem] md:p-12">
+    <article className="relative min-h-60 w-[21.4375rem] rounded-[10px] bg-dark-grayish-blue px-6 py-10 text-center md:w-[33.75rem] md:p-12">
       <p className="mb-6 text-[0.6875rem] tracking-[3.46px] text-neon-green md:text-sm md:tracking-[4.09px]">
         {!isFetching && `ADVICE #${data.slip.id}`}
       </p>
