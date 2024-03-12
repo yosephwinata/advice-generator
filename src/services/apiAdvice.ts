@@ -1,8 +1,16 @@
 import axiosInstance from "../axios/axiosInstance";
 
-export const getAdvice = async () => {
+interface AdviceResponse {
+  slip: {
+    id: number;
+    advice: string;
+  };
+}
+
+export const getAdvice = async (): Promise<AdviceResponse> => {
   try {
-    const response = await axiosInstance.get("/advice");
+    const response = await axiosInstance.get<AdviceResponse>("/advice");
+    console.log("response", response);
     return response.data;
   } catch (error) {
     console.error(error);
