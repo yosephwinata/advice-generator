@@ -16,10 +16,10 @@ const AdviceCard: React.FC = () => {
   return (
     <article className="relative min-h-60 w-[21.4375rem] rounded-[10px] bg-dark-grayish-blue px-6 py-10 text-center md:w-[33.75rem] md:p-12">
       <p className="mb-6 text-[0.6875rem] tracking-[3.46px] text-neon-green md:text-sm md:tracking-[4.09px]">
-        {!isFetching && `ADVICE #${data.slip.id}`}
+        {!isFetching && `ADVICE #${data?.slip.id}`}
       </p>
       <p className="mb-6 text-[1.5rem] -tracking-[0.26px] text-light-cyan md:mb-10 md:text-[1.75rem] md:leading-snug md:-tracking-[0.3px]">
-        {isFetching ? "Loading..." : data.slip.advice}
+        {isFetching ? "Loading..." : data?.slip.advice}
       </p>
       {isTablet || isDesktop ? (
         <PatternDividerDesktop />
